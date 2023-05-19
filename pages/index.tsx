@@ -10,20 +10,21 @@ export default function Home() {
 
   // check for errors
   if (error) {
-    return <p>:( an error happened</p>;
+    return <p>Uh oh! An error happened!</p>;
   }
 
   // if all good return data
   return (
     <div className={styles.container}>
       <Head>
-        <title>Covid Cases by Postcode</title>
+        <title>🦠 covidnearme.com</title>
         <link rel='icon' href='/favicon.ico' />
       </Head>
-      <h1>Covid Cases by Postcode</h1>
+      <h1>🦠 Covid Cases by Postcode</h1>
+      <p>Disclaimer: This site uses the latest official COVID-19 data provided by NSW Health. It's built and maintained by Sanjay and is not affiliated with the NSW government. If you have any questions, feedback, or ideas, you can email me at sanjayio@outlook.com. </p>
       {/* let the user know we are fetching the countries */}
       {loading && <p>loading...</p>}
-      {data && <p>Last processed date: {data?.dbt_prod_nsw_covid_tests_results_latest[0].processed_at_date}. Last update from NSW Government: {data?.dbt_prod_nsw_covid_tests_results_latest[0].notification_date}</p>}
+      {data && <p><b>Last processed date: {data?.dbt_prod_nsw_covid_tests_results_latest[0].processed_at_date}. Last update from NSW Government: {data?.dbt_prod_nsw_covid_tests_results_latest[0].notification_date}</b></p>}
       <div>
         {data?.dbt_prod_nsw_covid_tests_results_latest?.map((item) => (
           <div key='{item.postcode}_{item.notification_date}'>
