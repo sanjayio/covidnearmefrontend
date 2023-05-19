@@ -7,4 +7,7 @@ module.exports = {
     });
     return config;
   },
+  env: {
+    HASURA_ADMIN_SECRET: process.env.HASURA_ADMIN_SECRET,
+  }
 };

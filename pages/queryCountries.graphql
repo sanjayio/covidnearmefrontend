@@ -1,6 +1,13 @@
-query {
-  countries {
-    code
-    name
+query MyQuery {
+  dbt_prod_nsw_covid_tests_results_latest(limit: 1000) {
+    processed_at_date
+    postcode
+    notification_date
+    lhd_name_2010
+    lhd_code_2010
+    lga_name_2019
+    lga_code_2019
+    confirmed_cases_count
+    confirmed_by_pcr
   }
 }

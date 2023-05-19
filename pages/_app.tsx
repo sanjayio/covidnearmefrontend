@@ -1,13 +1,25 @@
 import type { AppProps } from 'next/app';
 import { ApolloClient, InMemoryCache } from '@apollo/client';
-import { ApolloProvider } from '@apollo/client';
+import { ApolloProvider, createHttpLink } from '@apollo/client';
+import { setContext } from '@apollo/client/link/context';
+import '../styles/globals.css';
 
-const client = new ApolloClient({
-  uri: 'https://countries.trevorblades.com',
-  cache: new InMemoryCache(),
+const authLink = setContext((_, { headers }) => {
+  return {
+  headers: {
+      ...headers, 'x-hasura-admin-secret': process.env.HASURA_ADMIN_SECRET
+    }
+  }
 });
 
-import '../styles/globals.css';
+const httpLink = createHttpLink({
+ uri: 'https://skiolabs.hasura.app/v1/graphql',
+});
+
+const client = new ApolloClient({
+ link: authLink.concat(httpLink),
+ cache: new InMemoryCache()
+});
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (

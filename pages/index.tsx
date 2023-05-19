@@ -17,15 +17,18 @@ export default function Home() {
   return (
     <div className={styles.container}>
       <Head>
-        <title>Countries GraphQL</title>
+        <title>Covid Cases by Postcode</title>
         <link rel='icon' href='/favicon.ico' />
       </Head>
-      <h1>Countries</h1>
+      <h1>Covid Cases by Postcode</h1>
+      <p>Last processed date: {data?.dbt_prod_nsw_covid_tests_results_latest[0].processed_at_date}. Last update from NSW Government: {data?.dbt_prod_nsw_covid_tests_results_latest[0].notification_date}</p>
       {/* let the user know we are fetching the countries */}
       {loading && <p>loading...</p>}
       <div>
-        {data?.countries?.map((country) => (
-          <div key={country.code}>{country.name}</div>
+        {data?.dbt_prod_nsw_covid_tests_results_latest?.map((item) => (
+          <div key='{item.postcode}_{item.notification_date}'>
+            On {item.notification_date}, {item.confirmed_cases_count} case(s) were notified in postcode {item.postcode}.
+          </div>
         ))}
       </div>
     </div>
