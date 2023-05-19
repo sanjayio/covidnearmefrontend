@@ -21,9 +21,9 @@ export default function Home() {
         <link rel='icon' href='/favicon.ico' />
       </Head>
       <h1>Covid Cases by Postcode</h1>
-      <p>Last processed date: {data?.dbt_prod_nsw_covid_tests_results_latest[0].processed_at_date}. Last update from NSW Government: {data?.dbt_prod_nsw_covid_tests_results_latest[0].notification_date}</p>
       {/* let the user know we are fetching the countries */}
       {loading && <p>loading...</p>}
+      {data && <p>Last processed date: {data?.dbt_prod_nsw_covid_tests_results_latest[0].processed_at_date}. Last update from NSW Government: {data?.dbt_prod_nsw_covid_tests_results_latest[0].notification_date}</p>}
       <div>
         {data?.dbt_prod_nsw_covid_tests_results_latest?.map((item) => (
           <div key='{item.postcode}_{item.notification_date}'>
